@@ -112,7 +112,11 @@ Now, run the vendors script to download Foundation:
 $ php bin/vendors update
 ```
 
-Now you can use is the `Krilla/FoundationBundle/Resources/base_foundation.html.twig` layout template. The template includes the Foundation JavaScript and CSS files. It is using the [Assetic](http://symfony.com/doc/current/cookbook/assetic/yuicompressor.html "How to Minify JavaScripts and Stylesheets with YUI Compressor") filter to combine and minify them with [YUI Compressor](http://developer.yahoo.com/yui/compressor/).
+Now you can use is the `Krilla/FoundationBundle/Resources/base_foundation_less.html.twig` or `Krilla/FoundationBundle/Resources/base_foundation_lessphp.html.twig` layout template. The templates include the Foundation JavaScript and CSS files. They are using the [Assetic](http://symfony.com/doc/current/cookbook/assetic/yuicompressor.html "How to Minify JavaScripts and Stylesheets with YUI Compressor") filter to combine and minify them with [YUI Compressor](http://developer.yahoo.com/yui/compressor/).
+
+**Note:**
+
+> This installation method requires a LESS compiler. The `Krilla/FoundationBundle/Resources/base_foundation_less.html.twig` template is using the `less` Assetic filter which requires a [LESS compiler](http://lesscss.org/#-server-side-usage) to be installed on [Node.js server](http://nodejs.org/). The `Krilla/FoundationBundle/Resources/base_foundation_lessphp.html.twig` template is using the `lessphp` Assetic filter, which needs the PHP LESS compiler `lessphp`. You can find instructions how to install `lessphp` in [Step 6: Install LESS compiler](#installation-6).
 
 <a name="installation-5"/>
 ### Step 5: Install YUI Compressor (recommended)
