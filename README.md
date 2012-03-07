@@ -10,13 +10,14 @@ The bundle can use either the [original](https://github.com/zurb/foundation) ver
 Installation
 ------------
 
--  [Step 1: Download KrillaFoundationBundle](#installation1)
+-  [Step 1: Download KrillaFoundationBundle](#installation-1)
 -  [Step 2: Configure the Autoloader](#installation-2)
 -  [Step 3: Enable the bundle](#installation-3)
 -  [Step 4: Install Foundation (recommended)](#installation-4)
     - [Step 4.1: Install the original version](#installation-4-1)
     - [Step 4.2: Install the LESS version](#installation-4-2)
 - [Step 5: Install YUI Compressor (recommended)](#installation-5)
+- [Step 6: Install LESS compiler (optional)](#installation-6)
 
 <a name="installation-1"/>
 ### Step 1: Download KrillaFoundationBundle
@@ -62,7 +63,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Krilla\KrillaFoundationBundle\KrillaFoundationBundle(),
+        new Krilla\FoundationBundle\KrillaFoundationBundle(),
     );
 }
 ```
@@ -92,7 +93,11 @@ Now, run the vendors script to download Foundation:
 $ php bin/vendors update
 ```
 
-Now you can use is the `Krilla/FoundationBundle/Resources/base_foundation.html.twig` layout template. The template includes the Foundation JavaScript and CSS files. It is using the [Assetic](http://symfony.com/doc/current/cookbook/assetic/yuicompressor.html "How to Minify JavaScripts and Stylesheets with YUI Compressor") filter to combine and minify them with [YUI Compressor](http://developer.yahoo.com/yui/compressor/).Follow the instructions on [Step 5: Install YUI Compressor](#installation_5) to enable the YUI Compressor.
+Now you can use is the `Krilla/FoundationBundle/Resources/base_foundation.html.twig` layout template. The template includes the Foundation JavaScript and CSS files. It is using [Assetic](http://symfony.com/doc/current/cookbook/assetic/yuicompressor.html "How to Minify JavaScripts and Stylesheets with YUI Compressor") filters to combine and minify them with [YUI Compressor](http://developer.yahoo.com/yui/compressor/).
+
+**Note:**
+
+> You can find instructions how to install YUI Compressor and configure the Assetic filters on [Step 5: Install YUI Compressor](#installation-5).
 
 
 <a name="installation-4-2"/>
@@ -140,7 +145,7 @@ Now, run the vendors script to download YUI Compressor:
 $ php bin/vendors update
 ```
 
-Now enable the Assetic filter by updating your `app/config/config.yml` file. The `assetic` section of the file should like this:
+Now enable the Assetic filter by updating your `app/config/config.yml` file. The configuration options of interest here are `yui_css` and `yui_js`. The `assetic` section of the file should like this:
 
 ```yaml
 # app/config/config.yml
@@ -202,4 +207,27 @@ spl_autoload_register(function($class) {
     );
     isset($paths[$class]) && require $paths[$class];
 });
+```
+
+Now enable the Assetic filter by updating your `app/config/config.yml` file. The configuration option of interest here is `lessphp`. The `assetic` section of the file should like this:
+
+```yaml
+# app/config/config.yml
+
+# ...
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    # java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        # closure:
+        #     jar: %kernel.root_dir%/java/compiler.jar
+        # yui_css:
+        #     jar: %kernel.root_dir%/java/yuicompressor-2.4.2.jar
+        lessphp: ~
+
+# ...
 ```
