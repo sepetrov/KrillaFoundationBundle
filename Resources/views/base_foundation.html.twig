@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+
+    {% stylesheets filter='cssrewrite,?yui_css' output='css/foundation.css'
+        'bundles/krillafoundation/foundation/stylesheets/globals.css'
+        'bundles/krillafoundation/foundation/stylesheets/typography.css'
+        'bundles/krillafoundation/foundation/stylesheets/grid.css'
+        'bundles/krillafoundation/foundation/stylesheets/ui.css'
+        'bundles/krillafoundation/foundation/stylesheets/forms.css'
+        'bundles/krillafoundation/foundation/stylesheets/orbit.css'
+        'bundles/krillafoundation/foundation/stylesheets/reveal.css'
+        'bundles/krillafoundation/foundation/stylesheets/mobile.css'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% stylesheets filter='?yui_css' output='css/foundation-ie.css'
+        'bundles/krillafoundation/foundation/stylesheets/ie.css'
+    %}
+        <!--[if lt IE 9]>
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        <![endif]-->
+    {% endstylesheets %}
+
+    {% javascripts filter='?yui_js' output='js/foundation-modernizr.js'
+        '@KrillaFoundationBundle/Resources/public/foundation/javascripts/modernizr.foundation.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+	
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    {% block body %}
+    {% endblock %}
+
+    {% javascripts filter='?yui_js' output='js/foundation.js'
+        '@KrillaFoundationBundle/Resources/public/foundation/javascripts/jquery.min.js'
+        '@KrillaFoundationBundle/Resources/public/foundation/javascripts/jquery.reveal.js'
+        '@KrillaFoundationBundle/Resources/public/foundation/javascripts/jquery.orbit-1.4.0.js'
+        '@KrillaFoundationBundle/Resources/public/foundation/javascripts/jquery.customforms.js'
+        '@KrillaFoundationBundle/Resources/public/foundation/javascripts/jquery.placeholder.min.js'
+        '@KrillaFoundationBundle/Resources/public/foundation/javascripts/jquery.tooltips.js'
+        '@KrillaFoundationBundle/Resources/public/foundation/javascripts/app.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% block javascripts %}{% endblock %}
+</body>
+</html>
